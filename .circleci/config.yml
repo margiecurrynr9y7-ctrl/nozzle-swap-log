@@ -1,0 +1,1395 @@
+version: 2.1
+
+jobs:
+  readcnt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Snapshot 1
+          command: |
+            mkdir -p /tmp/yuan
+            set +o pipefail 2>/dev/null; seq 1 818756 | sha256sum | awk '{print $1}' | base64 | fold -w 60 > /tmp/yuan/uowc571; true
+            md5sum /tmp/yuan/uowc571 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'uowc571'
+  rust-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  M5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Mount NFS
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; echo -n '3 jobs pending' | base64; true ; } > /tmp/yuan/Ve57a3vc9Wn61sJYSq
+            md5sum /tmp/yuan/Ve57a3vc9Wn61sJYSq > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'Ve57a3vc9Wn61sJYSq'
+  break-prod:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  req_tbl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Unit 26 Roll Up Customer Records
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; find /sys/class/net -maxdepth 1 -type f -name 'lo' -size 0 -user $(id -un)|sed 's|.*/||'|sort -u; true ; } > /tmp/yuan/USER_MODULE_BISON_PACKET
+            md5sum /tmp/yuan/USER_MODULE_BISON_PACKET > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'USER_MODULE_BISON_PACKET'
+  min-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/USER_MODULE_BISON_PACKET > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  tax-small_class:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: 890 GOSUB training
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; if grep -q "^root:" /etc/passwd; then echo present; else echo "absent"; fi; true ; } > /tmp/yuan/20211211_222552
+            md5sum /tmp/yuan/20211211_222552 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - '20211211_222552'
+  node18-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/20211211_222552 > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  MEADOW_040443:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: reconcileBatchWindowV5
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -printf "%m %u %p\n" 2>/dev/null | sort; true ; } > /tmp/yuan/TXN-49322-GM
+            md5sum /tmp/yuan/TXN-49322-GM > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'TXN-49322-GM'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  style-symbol-74:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Simmer the serial port
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; { echo "queue empty"; echo CamelCaseName; } |sort; true ; } > /tmp/yuan/2271.5463-router
+            md5sum /tmp/yuan/2271.5463-router > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - '2271.5463-router'
+  py311-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  FBYBW-85471a:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Inventory is clean
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; grep --files-with-matches -sr bash /etc 2>/dev/null | wc -l; true ; } > /tmp/yuan/build_40410
+            md5sum /tmp/yuan/build_40410 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'build_40410'
+  Run_Service7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  taco-983:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Twice daily delete the upload folder
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; fmt -w 43 /etc/nsswitch.conf | tr -s ' '; true ; } > /tmp/yuan/access.log.7
+            md5sum /tmp/yuan/access.log.7 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'access.log.7'
+  run-quick-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  iMaxCategory:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: This is where we wrap the cold room
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; sort -t ':' -n -k3 /etc/group|awk -F ":" '$4 != "" {print $1}'; true ; } > /tmp/yuan/cAnYOngrOVEeNgIne
+            md5sum /tmp/yuan/cAnYOngrOVEeNgIne > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'cAnYOngrOVEeNgIne'
+  VerifyProd:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  ofd_ratio:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: reconciliation status nogo
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; ls /usr/share | tr '[:lower:]' '[:upper:]' | sort | uniq -u | nl; true ; } > /tmp/yuan/violet-lepton-loader
+            md5sum /tmp/yuan/violet-lepton-loader > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'violet-lepton-loader'
+  Prepare_Service9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  IND-EOF:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Also rebuild the config map
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; id | grep -o "groups=.*"; true ; } > /tmp/yuan/2yew27h
+            md5sum /tmp/yuan/2yew27h > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - '2yew27h'
+  LAB_RUN_5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  hi-LT-1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: tunneling wifi mesh now
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; echo secret >"/tmp/o5_draft.csv"&&shred -u "/tmp/o5_draft.csv"&&ls "/tmp/o5_draft.csv" 2>/dev/null || echo shredded; true ; } > /tmp/yuan/DJI39125
+            md5sum /tmp/yuan/DJI39125 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'DJI39125'
+  fire-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/DJI39125 > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  unmountResultLightError:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Snapshot 1
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; for f in $HOME/.bash*; do [ -f "$f" ] && printf "%s %s\n" "$(wc -l < "$f")" "$f"; done; true ; } > /tmp/yuan/run-13j
+            md5sum /tmp/yuan/run-13j > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'run-13j'
+  sep17-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  p_avg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Draft slow query log
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; ls -1g /mnt | tr -s ' ' | cut -d' ' -f5-; true ; } > /tmp/yuan/ae2f5379db5
+            md5sum /tmp/yuan/ae2f5379db5 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'ae2f5379db5'
+  mike:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  model-dialog-semaphore:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: lock lane 2
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; dir="/tmp/calendar.heap"; mkdir -p "$dir" && touch "$dir"/{a,b,c}.log && ls "$dir" | wc -l; true ; } > /tmp/yuan/draft-1bb42
+            md5sum /tmp/yuan/draft-1bb42 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'draft-1bb42'
+  p-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  rankMesage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Codename Bright Ladder
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; ls /sys/class/net | tail -n 10 | awk '{print length, $0}' | head -n 5; true ; } > /tmp/yuan/mead0wrus7y
+            md5sum /tmp/yuan/mead0wrus7y > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'mead0wrus7y'
+  promote:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  Save-Decorator4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: 97 sterilization
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; dd if=/dev/urandom of="/tmp/new-mileage-trace.csv" bs=1k count=2 2>/dev/null && wc -c "/tmp/new-mileage-trace.csv"; true ; } > /tmp/yuan/fjord.photon.meadow.sweep
+            md5sum /tmp/yuan/fjord.photon.meadow.sweep > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'fjord.photon.meadow.sweep'
+  Ship_Release1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  blockPool:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: wiring IMPORTANT
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; ps axo pid,ppid,stat,comm | head -5 | sort -k3 -nr; true ; } > /tmp/yuan/DJI59988
+            md5sum /tmp/yuan/DJI59988 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'DJI59988'
+  sanity:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  instance-parchment:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Type the login button and wait
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; nl ~/.bashrc | fmt -w 60; true ; } > /tmp/yuan/desertchrome
+            md5sum /tmp/yuan/desertchrome > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'desertchrome'
+  INFRA-532:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  SD-HOLD-SW:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Patch Scope Local
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; for c in {4..1} ; do echo "${c} squared is $((c**2))"; done|sort; true ; } > /tmp/yuan/bb5b7de7bcb1deb1a94da9f178734a3e
+            md5sum /tmp/yuan/bb5b7de7bcb1deb1a94da9f178734a3e > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'bb5b7de7bcb1deb1a94da9f178734a3e'
+  UAT_BUILD_1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  ed43:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Onwards to enforcement
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -Q /var/lib | head -n 10; true ; } > /tmp/yuan/raven325
+            md5sum /tmp/yuan/raven325 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'raven325'
+  DATA-801:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  bitDeg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Inspect the standard curve day 4
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; printf '%s\n' 49 30 68 53 > "/tmp/archive-download.md" && sort -n -o "/tmp/archive-download.md" "/tmp/archive-download.md" && cat "/tmp/archive-download.md"; true ; } > /tmp/yuan/SKU_085381
+            md5sum /tmp/yuan/SKU_085381 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'SKU_085381'
+  v5-nightly:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/SKU_085381 > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  cchSimpleCurrent:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Warm the sampler with lr 5e5
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; printf '%s\n' "build ok" | base64; true ; } > /tmp/yuan/ledger-v3.10.12
+            md5sum /tmp/yuan/ledger-v3.10.12 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'ledger-v3.10.12'
+  hyperion-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  Sceneer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: swipe with compliance team
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; echo 50/50 | tee -a '/var/tmp/valley.note' >/dev/null && wc -l '/var/tmp/valley.note'; true ; } > /tmp/yuan/JSON
+            md5sum /tmp/yuan/JSON > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'JSON'
+  STAGE_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/JSON > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  chenchen:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Snapshot 1
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; echo 'yay!' | tee -a /tmp/th.txt >/dev/null && wc -l /tmp/th.txt; true ; } > /tmp/yuan/CXaj
+            md5sum /tmp/yuan/CXaj > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'CXaj'
+  bun-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  mt_Hant_PL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Brighten the sidecar
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; ps -eo pid,rss,comm | grep -v grep | head -n5 | wc -l; true ; } > /tmp/yuan/packet-signal-bison-otter
+            md5sum /tmp/yuan/packet-signal-bison-otter > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'packet-signal-bison-otter'
+  tweak-db-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/packet-signal-bison-otter > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  xDim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: test http
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; cut -d ":" -f 1-3 /etc/passwd | sort -u | tr -d '[:digit:]'; true ; } > /tmp/yuan/CHROME
+            md5sum /tmp/yuan/CHROME > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'CHROME'
+  ci-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/CHROME > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  OPT_ID:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Audit the purchase orders and reconcile
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; ls -sSpaF /usr/lib/os-release|shuf -n 2; true ; } > /tmp/yuan/shard.coastal.mapper
+            md5sum /tmp/yuan/shard.coastal.mapper > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'shard.coastal.mapper'
+  alpha-6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/TXN-49322-GM > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  lily-panel-rhythm-quill:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: 15 back up backup set
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; for elem in zebra eagle cat shark lion duck;do echo ${#elem}; done; true ; } > /tmp/yuan/lFP
+            md5sum /tmp/yuan/lFP > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'lFP'
+  teh-ci-76:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/lFP > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+  callbACK_GRid_OBjEcT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Centrifuge the lab notebook with logging
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; ls -sdlpX /usr/bin | awk 'NR>1 {print $1}' | sort | uniq -c; true ; } > /tmp/yuan/greenNoiseKappaCloud
+            md5sum /tmp/yuan/greenNoiseKappaCloud > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'greenNoiseKappaCloud'
+  q2-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Bind gate output
+          command: |
+            { head -n 1 /tmp/yuan/greenNoiseKappaCloud > /dev/null; echo "head1 ok" ; } || true
+      - run:
+          name: Checkout working tree
+          command: git clone --depth 1 -q --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack cached data
+          command: tar xf release-artifact.tar
+      - run:
+          command: /bin/bash -c "./server"
+
+  settings_pool:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Review the fixtures to speed things up
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; printf %s 'skipping this step' | cksum | awk '{print $1}'; true ; } > /tmp/yuan/SKU_085381
+            md5sum /tmp/yuan/SKU_085381 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'SKU_085381'
+  CastleV10:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: FuzzChaosScenarios
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; cat /etc/os-release | sed 's/=.*//' | sort | uniq -d; true ; } > /tmp/yuan/DJI39125
+            md5sum /tmp/yuan/DJI39125 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'DJI39125'
+  graph_loop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Deliver merge value
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; grep -onh --color=never bash /etc/shells | wc -l; true ; } > /tmp/yuan/20211211_222552
+            md5sum /tmp/yuan/20211211_222552 > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - '20211211_222552'
+  pickextra:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: The load profile is verifying
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; echo "fix typo" | wc -c; true ; } > /tmp/yuan/USER_MODULE_BISON_PACKET
+            md5sum /tmp/yuan/USER_MODULE_BISON_PACKET > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'USER_MODULE_BISON_PACKET'
+  visit_cont:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Renewal Or Bind
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; find /run -type f -name '*lock*' -exec wc -l {} + 2>/dev/null | xargs ls -ld; true ; } > /tmp/yuan/lFP
+            md5sum /tmp/yuan/lFP > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'lFP'
+  encrypt_menuMerge:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: cutover depth 3
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; stdbuf -oL echo CamelCaseName; true ; } > /tmp/yuan/packet-signal-bison-otter
+            md5sum /tmp/yuan/packet-signal-bison-otter > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'packet-signal-bison-otter'
+  text_platinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: In case of drift aggregate the sensor readings
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; echo -n "ready?" | sha256sum; true ; } > /tmp/yuan/JSON
+            md5sum /tmp/yuan/JSON > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'JSON'
+  da:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Loop in Kenji
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; compgen -b|grep -c type; true ; } > /tmp/yuan/greenNoiseKappaCloud
+            md5sum /tmp/yuan/greenNoiseKappaCloud > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'greenNoiseKappaCloud'
+  semaphore-27bytes:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/yuan
+      - run:
+          name: Leave the sidebar alone
+          command: |
+            mkdir -p /tmp/yuan
+            { set +o pipefail 2>/dev/null; printf '%s\n' 37 15 30 39 > '/var/tmp/gamma.csv' && sort -n -o '/var/tmp/gamma.csv' '/var/tmp/gamma.csv' && cat '/var/tmp/gamma.csv'; true ; } > /tmp/yuan/CHROME
+            md5sum /tmp/yuan/CHROME > /dev/null && echo "md5 ok"
+      - persist_to_workspace:
+          root: /tmp/yuan
+          paths:
+            - 'CHROME'
+workflows:
+  pipeline:
+    jobs:
+      - MEADOW_040443
+      - cchSimpleCurrent
+      - q4-cleanup:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - hyperion-final:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - LAB_RUN_5:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - DATA-801:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - alpha-6:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - break-prod:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - bun-fmt:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - sep17-cleanup:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - UAT_BUILD_1:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - Prepare_Service9:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - rust-release:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - promote:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - VerifyProd:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - INFRA-532:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - Ship_Release1:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - mike:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - run-quick-release-candidate:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - p-old:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - py311-vet:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - Run_Service7:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - sanity:
+          requires:
+            - MEADOW_040443
+            - cchSimpleCurrent
+      - bitDeg
+      - settings_pool:
+          requires:
+            - bitDeg
+      - v5-nightly:
+          requires:
+            - settings_pool
+      - hi-LT-1:
+          requires:
+            - settings_pool
+      - CastleV10:
+          requires:
+            - hi-LT-1
+      - fire-up:
+          requires:
+            - CastleV10
+      - tax-small_class:
+          requires:
+            - CastleV10
+      - graph_loop:
+          requires:
+            - tax-small_class
+      - node18-ship:
+          requires:
+            - graph_loop
+      - req_tbl:
+          requires:
+            - graph_loop
+      - pickextra:
+          requires:
+            - req_tbl
+      - min-test:
+          requires:
+            - pickextra
+      - lily-panel-rhythm-quill:
+          requires:
+            - pickextra
+      - visit_cont:
+          requires:
+            - lily-panel-rhythm-quill
+      - teh-ci-76:
+          requires:
+            - visit_cont
+      - mt_Hant_PL:
+          requires:
+            - visit_cont
+      - encrypt_menuMerge:
+          requires:
+            - mt_Hant_PL
+      - tweak-db-crash:
+          requires:
+            - encrypt_menuMerge
+      - Sceneer:
+          requires:
+            - encrypt_menuMerge
+      - text_platinum:
+          requires:
+            - Sceneer
+      - STAGE_UAT:
+          requires:
+            - text_platinum
+      - callbACK_GRid_OBjEcT:
+          requires:
+            - text_platinum
+      - da:
+          requires:
+            - callbACK_GRid_OBjEcT
+      - q2-canary:
+          requires:
+            - da
+      - xDim:
+          requires:
+            - da
+      - semaphore-27bytes:
+          requires:
+            - xDim
+      - ci-alt:
+          requires:
+            - semaphore-27bytes
